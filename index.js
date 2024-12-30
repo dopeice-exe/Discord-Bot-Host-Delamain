@@ -16,6 +16,7 @@ YouTube : https://www.youtube.com/@GlaceYT
 
 
 */
+const statusCommand = require('./statusCommand.js');
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
