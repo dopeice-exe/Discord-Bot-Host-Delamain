@@ -18,7 +18,6 @@ YouTube : https://www.youtube.com/@GlaceYT                         
 
 */
 
-const statusCommand = require('./statusCommand.js'); // Import the command
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
@@ -40,7 +39,7 @@ app.listen(port, () => {
   console.log('\x1b[36m[ SERVER ]\x1b[0m', '\x1b[32m SH : http://localhost:' + port + ' ✅\x1b[0m');
 });
 
-const statusMessages = ["Assisting clients", "Directing cab network"];
+const statusMessages = ["Assisting clients. . .", "Directing cab network. . ."];
 const statusTypes = [ 'online'];
 let currentStatusIndex = 0;
 let currentTypeIndex = 0;
@@ -65,19 +64,11 @@ function heartbeat() {
   // ... (rest of your heartbeat function)
 }
 
-client.once('ready', async () => { 
+client.once('ready', () => { 
   console.log('\x1b[36m[ INFO ]\x1b[0m', `\x1b[34mPing: ${client.ws.ping} ms \x1b[0m`);
   updateStatus();
   setInterval(updateStatus, 10000);
   heartbeat();
-
-  try {
-    await client.application.commands.set([statusCommand.data]); 
-    console.log('Slash commands registered globally.');
-  } catch (error) {
-    console.error('Error registering commands:', error);
-  }
-
 });
 
 login();
