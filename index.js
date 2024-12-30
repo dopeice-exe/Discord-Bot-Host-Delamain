@@ -1,23 +1,21 @@
 /*
 
 ☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-
-
-_________ ___ ___ ._______   _________    
-/   _____//   |   \|   \   \ /   /  _  \   
-\_____  \/    ~    \   |\   Y   /  /_\  \  
-/        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-                                                                       
+                                                 
+  _________ ___ ___ ._______   _________    
+ /   _____//   |   \|   \   \ /   /  _  \   
+ \_____  \/    ~    \   |\   Y   /  /_\  \  
+ /        \    Y    /   | \     /    |    \ 
+/_______  /\___|_  /|___|  \___/\____|__  / 
+        \/       \/                     \/  
+                    
+DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
+YouTube : https://www.youtube.com/@GlaceYT                         
+                                                                       
 ☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
 
 
 */
-
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
@@ -39,8 +37,8 @@ app.listen(port, () => {
   console.log('\x1b[36m[ SERVER ]\x1b[0m', '\x1b[32m SH : http://localhost:' + port + ' ✅\x1b[0m');
 });
 
-const statusMessages = ["Assisting clients. . .", "Directing cab network. . ."];
-const statusTypes = [ 'online'];
+const statusMessages = ["🎧 Listening to Spotify", "🎮 Playing VALORANT"];
+const statusTypes = [ 'dnd', 'idle'];
 let currentStatusIndex = 0;
 let currentTypeIndex = 0;
 
@@ -57,14 +55,24 @@ async function login() {
 }
 
 function updateStatus() {
-  // ... (rest of your updateStatus function)
+  const currentStatus = statusMessages[currentStatusIndex];
+  const currentType = statusTypes[currentTypeIndex];
+  client.user.setPresence({
+    activities: [{ name: currentStatus, type: ActivityType.Custom }],
+    status: currentType,
+  });
+  console.log('\x1b[33m[ STATUS ]\x1b[0m', `Updated status to: ${currentStatus} (${currentType})`);
+  currentStatusIndex = (currentStatusIndex + 1) % statusMessages.length;
+  currentTypeIndex = (currentTypeIndex + 1) % statusTypes.length;
 }
 
 function heartbeat() {
-  // ... (rest of your heartbeat function)
+  setInterval(() => {
+    console.log('\x1b[35m[ HEARTBEAT ]\x1b[0m', `Bot is alive at ${new Date().toLocaleTimeString()}`);
+  }, 30000);
 }
 
-client.once('ready', () => { 
+client.once('ready', () => {
   console.log('\x1b[36m[ INFO ]\x1b[0m', `\x1b[34mPing: ${client.ws.ping} ms \x1b[0m`);
   updateStatus();
   setInterval(updateStatus, 10000);
@@ -73,22 +81,21 @@ client.once('ready', () => {
 
 login();
 
-  
+  
 /*
 
 ☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-
-
-_________ ___ ___ ._______   _________    
-/   _____//   |   \|   \   \ /   /  _  \   
-\_____  \/    ~    \   |\   Y   /  /_\  \  
-/        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-                                                                       
+                                                 
+  _________ ___ ___ ._______   _________    
+ /   _____//   |   \|   \   \ /   /  _  \   
+ \_____  \/    ~    \   |\   Y   /  /_\  \  
+ /        \    Y    /   | \     /    |    \ 
+/_______  /\___|_  /|___|  \___/\____|__  / 
+        \/       \/                     \/  
+                    
+DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
+YouTube : https://www.youtube.com/@GlaceYT                         
+                                                                       
 ☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
 
 
