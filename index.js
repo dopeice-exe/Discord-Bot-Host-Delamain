@@ -65,17 +65,40 @@ function heartbeat() {
   // ... (rest of your heartbeat function)
 }
 
-client.once('ready', () => {
+client.once('ready', async () => { 
   console.log('\x1b[36m[ INFO ]\x1b[0m', `\x1b[34mPing: ${client.ws.ping} ms \x1b[0m`);
   updateStatus();
   setInterval(updateStatus, 10000);
   heartbeat();
 
-  // Add the following code to register the command
-  client.guilds.cache.forEach(async (guild) => {
-    await guild.commands.create(statusCommand.data); 
-  });
+  try {
+    await client.application.commands.set([statusCommand.data]); 
+    console.log('Slash commands registered globally.');
+  } catch (error) {
+    console.error('Error registering commands:', error);
+  }
 
 });
 
 login();
+
+  
+/*
+
+☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
+
+
+_________ ___ ___ ._______   _________    
+/   _____//   |   \|   \   \ /   /  _  \   
+\_____  \/    ~    \   |\   Y   /  /_\  \  
+/        \    Y    /   | \     /    |    \ 
+/_______  /\___|_  /|___|  \___/\____|__  / 
+        \/       \/                     \/  
+                    
+DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
+YouTube : https://www.youtube.com/@GlaceYT                         
+                                                                       
+☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
+
+
+*/
